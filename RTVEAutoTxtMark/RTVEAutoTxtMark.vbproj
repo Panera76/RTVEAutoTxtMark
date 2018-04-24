@@ -121,5 +121,11 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo Doc-it.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo RTVE.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
