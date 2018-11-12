@@ -144,6 +144,7 @@ Public Class Form1
         If r.IsMatch(NombreFichero) = False Then
             lblEstado.Text = "En espera"
             txtLog.Text += DateTime.Now & " - El fichero " & RutaNombreFicheroPDF & " contiene un nombre erróneo" & vbCrLf
+            txtLog.Select(txtLog.Text.Length, 0)
             Me.Refresh()
             Return -1
         End If
@@ -155,6 +156,7 @@ Public Class Form1
         If Publicacion = "Error" Then
             lblEstado.Text = "En espera"
             txtLog.Text += DateTime.Now & " - El archivo " & RutaNombreFicheroPDF & " contiene un nombre erróneo" & vbCrLf
+            txtLog.Select(txtLog.Text.Length, 0)
             Me.Refresh()
             Return -2
         End If
@@ -166,7 +168,7 @@ Public Class Form1
         Cadena = "%%" & Publicacion & " / " & Fecha & " / "
         If My.Computer.FileSystem.FileExists(RutaNombreFicheroPDF) = False Then
             lblEstado.Text = "En espera"
-            txtLog.Text += DateTime.Now & " - Error leyendo archivo " & RutaNombreFicheroPDF & vbCrLf
+            'txtLog.Text += DateTime.Now & " - Error leyendo archivo " & RutaNombreFicheroPDF & vbCrLf
             Me.Refresh()
             Return -3
         End If
@@ -191,21 +193,25 @@ Public Class Form1
             File.WriteAllText(SubCarpetaDestino & "\" & Fecha & ".txt", TextoPDF, Encoding.UTF8)
             lblEstado.Text = "En espera"
             txtLog.Text += DateTime.Now & " - Generado fichero " & Fecha & ".txt de " & Publicacion & vbCrLf
+            txtLog.Select(txtLog.Text.Length, 0)
             Me.Refresh()
         Catch ex As Exception
             'MessageBox.Show("Error en la escritura del fichero " & SubCarpetaDestino & "\" & Fecha & ".txt" & " - Descripción: " & ex.Message)
             lblEstado.Text = "En espera"
             txtLog.Text += DateTime.Now & " - Error en la escritura del fichero " & SubCarpetaDestino & "\" & Fecha & ".txt de " & Publicacion & " - Descripción: " & ex.Message & vbCrLf
+            txtLog.Select(txtLog.Text.Length, 0)
         End Try
 
         Try
             My.Computer.FileSystem.MoveFile(RutaNombreFicheroPDF, SubCarpetaDestino & "\" & Fecha & ".pdf", True)
             txtLog.Text += DateTime.Now & " - Movido el fichero " & Fecha & ".pdf de " & Publicacion & vbCrLf
+            txtLog.Select(txtLog.Text.Length, 0)
             Me.Refresh()
         Catch ex As Exception
             'MessageBox.Show("Error moviendo el fichero " & RutaNombreFicheroPDF & " - Descripción: " & ex.Message)
             lblEstado.Text = "En espera"
             txtLog.Text += DateTime.Now & " - Error moviendo el fichero " & RutaNombreFicheroPDF & " - Descripción: " & ex.Message & vbCrLf
+            txtLog.Select(txtLog.Text.Length, 0)
         End Try
 
     End Function
@@ -249,4 +255,7 @@ Public Class Form1
         End Select
     End Function
 
+    Private Sub txtLog_DoubleClick(sender As Object, e As EventArgs) Handles txtLog.DoubleClick
+        txtLog.Text = ""
+    End Sub
 End Class

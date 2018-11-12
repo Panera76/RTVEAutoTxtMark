@@ -157,7 +157,7 @@ Partial Class Form1
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(37, 13)
         Me.lblVersion.TabIndex = 15
-        Me.lblVersion.Text = "v1.0.0"
+        Me.lblVersion.Text = "v1.0.1"
         '
         'Form1
         '
